@@ -171,9 +171,12 @@ class WindowUser(QtWidgets.QMainWindow):
 
         fig, ax = plt.subplots()
 
-        ax.bar([0.8, 1.8, 2.8, 3.8], [data_male_age1, data_male_age2, data_male_age3, data_male_age4], width=0.4)
-        ax.bar([1.2, 2.2, 3.2, 4.2], [data_female_age1, data_female_age2, data_female_age3, data_female_age4], width=0.4)
+        ax.bar([0.8, 1.8, 2.8, 3.8], [data_male_age1, data_male_age2, data_male_age3, data_male_age4], width=0.4, label = 'мужчины')
+        ax.bar([1.2, 2.2, 3.2, 4.2], [data_female_age1, data_female_age2, data_female_age3, data_female_age4], width=0.4, label = 'женщины')
 
+        ax.legend()
+        ax.set_xlabel('<=18                  19-29                  30-45                  >-45')
+        ax.set_ylabel('кол-во человек')
         ax.set_facecolor('seashell')
         fig.set_figwidth(12)
         fig.set_figheight(6)
