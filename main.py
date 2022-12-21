@@ -1,5 +1,7 @@
 import sys
 import sqlite3
+import numpy as np
+import matplotlib.pyplot as plt
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.Qt import *
 
@@ -129,10 +131,22 @@ class WindowUser(QtWidgets.QMainWindow):
         self.centralwidget = QtWidgets.QWidget()
         self.setCentralWidget(self.centralwidget)
 
-        self.label = QtWidgets.QLabel(f'<h1>Привет, {name}!</h1>', alignment=Qt.AlignCenter)
+        x1 = np.arange(1, 8) - 0.2
+        x2 = np.arange(1, 8) + 0.2
+        y1 = np.random.randint(1, 10, size=7)
+        y2 = np.random.randint(1, 10, size=7)
 
-        self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
-        self.gridLayout.addWidget(self.label, 0, 0, 1, 1)
+        fig, ax = plt.subplots()
+
+        ax.bar(x1, y1, width=0.4)
+        ax.bar(x2, y2, width=0.4)
+
+        ax.set_facecolor('seashell')
+        fig.set_figwidth(12)
+        fig.set_figheight(6)
+        fig.set_facecolor('floralwhite')
+
+        plt.show()
 
 
 class Login(QWidget):
