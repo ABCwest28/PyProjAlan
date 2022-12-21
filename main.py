@@ -134,20 +134,45 @@ class WindowUser(QtWidgets.QMainWindow):
         data_male = self.myfunc_getdata("male")
         data_female = self.myfunc_getdata("female")
 
+        data_male_age1 = 0
+        data_male_age2 = 0
+        data_male_age3 = 0
+        data_male_age4 = 0
+        data_female_age1 = 0
+        data_female_age2 = 0
+        data_female_age3 = 0
+        data_female_age4 = 0
+
         for i in range(len(data_male)):
             print(data_male[i][0])
-        for i in range(len(data_female)):
-            print(data_female[i][0])
+            if data_male[i][0] in range(0, 19):
+                data_male_age1 += 1
+            elif data_male[i][0] in range(19, 30):
+                data_male_age2 += 1
+            elif data_male[i][0] in range(30, 45):
+                data_male_age3 += 1
+            elif data_male[i][0] >= 45:
+                data_male_age4 += 1
 
-        x1 = np.arange(1, 8) - 0.2
-        x2 = np.arange(1, 8) + 0.2
-        y1 = np.random.randint(1, 10, size=7)
-        y2 = np.random.randint(1, 10, size=7)
+        for i in range(len(data_female)):
+            if data_female[i][0] in range(0, 19):
+                data_female_age1 += 1
+            elif data_female[i][0] in range(19, 30):
+                data_female_age2 += 1
+            elif data_female[i][0] in range(30, 45):
+                data_female_age3 += 1
+            elif data_female[i][0] >= 45:
+                data_female_age4 += 1
+
+        #x1 = np.arange(1, 5) - 0.2
+        #x2 = np.arange(1, 5) + 0.2
+        #y1 = [data_male[0:len(data_male)][0]]
+        #y2 = data_female[0:len(data_male)][0]
 
         fig, ax = plt.subplots()
 
-        ax.bar(x1, y1, width=0.4)
-        ax.bar(x2, y2, width=0.4)
+        ax.bar([0.8, 1.8, 2.8, 3.8], [data_male_age1, data_male_age2, data_male_age3, data_male_age4], width=0.4)
+        ax.bar([1.2, 2.2, 3.2, 4.2], [data_female_age1, data_female_age2, data_female_age3, data_female_age4], width=0.4)
 
         ax.set_facecolor('seashell')
         fig.set_figwidth(12)
