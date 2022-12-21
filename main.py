@@ -131,6 +131,14 @@ class WindowUser(QtWidgets.QMainWindow):
         self.centralwidget = QtWidgets.QWidget()
         self.setCentralWidget(self.centralwidget)
 
+        data_male = self.myfunc_getdata("male")
+        data_female = self.myfunc_getdata("female")
+
+        for i in range(len(data_male)):
+            print(data_male[i][0])
+        for i in range(len(data_female)):
+            print(data_female[i][0])
+
         x1 = np.arange(1, 8) - 0.2
         x2 = np.arange(1, 8) + 0.2
         y1 = np.random.randint(1, 10, size=7)
@@ -147,6 +155,31 @@ class WindowUser(QtWidgets.QMainWindow):
         fig.set_facecolor('floralwhite')
 
         plt.show()
+        self.showMinimized()
+
+    def myfunc_getdata(self, arg):
+        try:
+            sqlite_connection = sqlite3.connect('logins.db')
+            cursor = sqlite_connection.cursor()
+            print("myfunc_getdata---->Подключен к SQLite")
+            if arg == "male":
+                sqlite_select_query0 = """SELECT age FROM data WHERE sex = 0"""
+                cursor.execute(sqlite_select_query0)
+                result = cursor.fetchall()
+            else:
+                sqlite_select_query1 = """SELECT age FROM data WHERE sex = 1"""
+                cursor.execute(sqlite_select_query1)
+                result = cursor.fetchall()
+            cursor.close()
+            print("myfunc_getdata---->", len(result))
+            return result
+
+        except sqlite3.Error as error:
+            print("myfunc_getdata---->Ошибка при работе с SQLite", error)
+        finally:
+            if sqlite_connection:
+                sqlite_connection.close()
+                print("myfunc_getdata---->Соединение с SQLite закрыто")
 
 
 class Login(QWidget):
